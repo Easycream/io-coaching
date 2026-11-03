@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IO Coaching – Klarheit für den nächsten Schritt</title>
+<meta name="description" content="IO Coaching: Systemisches Einzelcoaching für Menschen, die sich beruflich oder persönlich neu ausrichten wollen. Kostenloses Erstgespräch.">
+<style>
+:root{
+  --bg:#F2F5F4; --ink:#12262B; --muted:#4B5F64; --accent:#1F6F78; --accent-dark:#185861; --gold:#E9B949; --line:#C9D4D3; --white:#fff;
+  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Public Sans","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.65;font-size:1.0625rem}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em}
+p{max-width:62ch}
+
+header{padding:1.25rem 0}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.logo{display:flex;align-items:center;gap:.6rem;font-family:var(--head);font-weight:800;font-size:1.25rem;text-decoration:none}
+.mark{display:inline-flex;align-items:center;gap:.22rem}
+.mark i{display:block;width:.42rem;height:1.5rem;background:var(--ink);border-radius:.2rem}
+.mark b{display:block;width:1.5rem;height:1.5rem;border:.42rem solid var(--accent);border-radius:50%}
+nav a{margin-left:1.5rem;text-decoration:none;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+
+.hero{padding:4rem 0 5rem}
+.hero .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:3rem;align-items:center}
+.hero h1{font-size:clamp(2.6rem,6.5vw,4.8rem);font-weight:800}
+.hero p.lead{margin-top:1.5rem;font-size:1.25rem;color:var(--muted)}
+.btns{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.9rem}
+.btn{display:inline-block;padding:.9rem 1.6rem;border-radius:.4rem;font-weight:600;text-decoration:none;border:2px solid var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--white)}
+.btn.primary:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+.btn.ghost:hover{background:var(--ink);color:var(--white)}
+.path{width:100%;height:auto}
+.path text{font-family:var(--body);fill:var(--ink)}
+.path .big{font-weight:800;font-size:22px}
+.path .small{font-weight:600;font-size:14px;fill:var(--muted)}
+
+section{padding:4.5rem 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:2rem}
+.offers{list-style:none}
+.offers li{display:grid;grid-template-columns:14rem 1fr;gap:1rem 2rem;padding:1.5rem 0;border-bottom:1px solid var(--line)}
+.offers li:first-child{padding-top:0}
+.offers h3{font-size:1.4rem}
+.offers p{color:var(--muted)}
+.steps{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem 3rem}
+.step-note{margin-top:2.5rem;font-size:.95rem;color:var(--muted)}
+.steps li{counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:50%;background:var(--accent);color:var(--white);font-family:var(--head);font-weight:700;margin-bottom:1rem}
+.steps h3{font-size:1.25rem;margin-bottom:.4rem}
+.steps p{color:var(--muted)}
+.about{display:grid;grid-template-columns:1fr 1.6fr;gap:3rem;align-items:start}
+.portrait{aspect-ratio:4/5;background:var(--line);border-radius:.6rem;display:grid;place-items:center;color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
+.about p{color:var(--muted)}
+.contact{background:var(--ink);color:var(--white);border-top:0}
+.contact p{color:#B9CBCB}
+.contact .btn.primary{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.contact .btn.primary:hover{background:var(--white);border-color:var(--white);color:var(--ink)}
+.contact .mail{display:block;margin-top:1.2rem;color:var(--white)}
+footer{padding:2rem 0;font-size:.95rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+footer a{margin-left:1.2rem}
+
+@media(max-width:52rem){
+  .hero .wrap,.about{grid-template-columns:1fr}
+  
+  .offers li{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  nav a{margin-left:1rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+
+/* Hero-Animation (8 s): i und o fahren auseinander, danach wird die Straße gebaut. Mit kurzen Pausen erscheinen ?, Glühlampe und !
+   (Frage, Idee, Lösung). Sobald i und o wieder zusammenfahren, wird die Straße zurückgebaut. */
+.i-mark{animation:moveI 8s infinite}
+.o-mark{animation:moveO 8s infinite}
+.cover{stroke:var(--bg);stroke-width:42;stroke-dasharray:1 2;stroke-dashoffset:-1;animation:roadDraw 8s infinite}
+.flow{animation:flow .7s linear infinite}
+.st1{animation:st1 8s infinite}
+.st2{animation:st2 8s infinite}
+.lab{animation:labFade 8s infinite}
+.pop1,.pop2,.pop3{transform-box:fill-box;transform-origin:center}
+.pop1{animation:pop1 8s infinite}
+.pop2{animation:pop2 8s infinite}
+.pop3{animation:pop3 8s infinite}
+@keyframes moveI{0%,5%{transform:translate(92px,-141px);animation-timing-function:cubic-bezier(.65,0,.35,1)}31%,87.50%{transform:translate(0,0);animation-timing-function:cubic-bezier(.65,0,.35,1)}100%{transform:translate(92px,-141px)}}
+@keyframes moveO{0%,5%{transform:translate(-110px,112px);animation-timing-function:cubic-bezier(.65,0,.35,1)}31%,87.50%{transform:translate(0,0);animation-timing-function:cubic-bezier(.65,0,.35,1)}100%{transform:translate(-110px,112px)}}
+@keyframes roadDraw{0.00%{stroke-dashoffset:0.0000;animation-timing-function:linear}32.50%{stroke-dashoffset:0.0000;animation-timing-function:linear}37.22%{stroke-dashoffset:-0.1700;animation-timing-function:linear}40.97%{stroke-dashoffset:-0.1700;animation-timing-function:linear}49.17%{stroke-dashoffset:-0.4650;animation-timing-function:linear}52.92%{stroke-dashoffset:-0.4650;animation-timing-function:linear}62.22%{stroke-dashoffset:-0.8000;animation-timing-function:linear}65.97%{stroke-dashoffset:-0.8000;animation-timing-function:linear}71.53%{stroke-dashoffset:-1.0000;animation-timing-function:linear}87.50%{stroke-dashoffset:-1.0000;animation-timing-function:linear}98.75%{stroke-dashoffset:0.0000;animation-timing-function:linear}100.00%{stroke-dashoffset:0.0000;animation-timing-function:linear}}
+@keyframes st1{0%,45.87%{opacity:0}48.37%,93.10%{opacity:1}94.60%,100%{opacity:0}}
+@keyframes st2{0%,54.88%{opacity:0}57.38%,90.97%{opacity:1}92.47%,100%{opacity:0}}
+@keyframes pop1{0%,37.85%{opacity:0;transform:scale(.3)}40.60%{opacity:1;transform:scale(1.18)}42.60%,95.34%{opacity:1;transform:scale(1)}96.84%,100%{opacity:0;transform:scale(.3)}}
+@keyframes pop2{0%,49.79%{opacity:0;transform:scale(.3)}52.54%{opacity:1;transform:scale(1.18)}54.54%,92.02%{opacity:1;transform:scale(1)}93.52%,100%{opacity:0;transform:scale(.3)}}
+@keyframes pop3{0%,62.85%{opacity:0;transform:scale(.3)}65.60%{opacity:1;transform:scale(1.18)}67.60%,88.25%{opacity:1;transform:scale(1)}89.75%,100%{opacity:0;transform:scale(.3)}}
+@keyframes labFade{0%,30%{opacity:0}37%,87.50%{opacity:1}90.00%,100%{opacity:0}}
+@keyframes flow{to{stroke-dashoffset:-16}}
+.path:hover *{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.i-mark,.o-mark,.cover,.flow,.st1,.st2,.lab,.pop1,.pop2,.pop3{animation:none}}
+
+
+/* Platzhalter, Honorar, FAQ */
+.ph{background:#FFE9A8;color:var(--ink);border-radius:.2em;padding:0 .15em}
+.faq details{border-bottom:1px solid var(--line);padding:1.1rem 0}
+.faq details:first-child{border-top:1px solid var(--line)}
+.faq summary{cursor:pointer;font-family:var(--head);font-weight:700;font-size:1.15rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.5rem;line-height:1;color:var(--accent);flex:none}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin-top:.7rem;color:var(--muted)}
+.faq details p a{color:var(--accent)}
+
+.about>div{min-width:0}
+.about p,.about li{overflow-wrap:break-word;hyphens:auto}
+.about img.portrait{padding:0;background:none;display:block;width:100%;height:auto;object-fit:cover;object-position:50% 20%}
+.about .qual{margin-top:.4rem;padding-left:1.2rem;color:var(--muted);max-width:62ch}
+.about .qual li{margin-bottom:.3rem}
+@media(max-width:52rem){.about img.portrait{max-width:20rem}}
+
+/* Stimmen */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem}
+.rev{background:var(--white);border-radius:.6rem;border-top:4px solid var(--gold);padding:1.75rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem}
+.rev blockquote p{color:var(--ink);font-size:1.05rem;max-width:none}
+.rev blockquote p::before{content:"„"}
+.rev blockquote p::after{content:"“"}
+.rev figcaption{display:flex;align-items:center;gap:.9rem}
+.rev .ini{flex:none;width:2.9rem;height:2.9rem;border-radius:50%;background:var(--accent);color:var(--white);display:grid;place-items:center;font-family:var(--head);font-weight:700;letter-spacing:.02em}
+.rev .who{display:block;font-weight:600;line-height:1.3}
+.rev .ctx{display:block;font-size:.9rem;color:var(--muted);line-height:1.3}
+.rev-note{margin-top:1.5rem;font-size:.9rem;color:var(--muted)}
+@media(max-width:56rem){.rev-grid{grid-template-columns:1fr}}
+
+/* === Smartphone-Optimierung === */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img,svg{max-width:100%}
+.mcta{display:none}
+@media(max-width:56rem){
+  body{padding-bottom:5.5rem}
+  .wrap{padding-left:1.25rem;padding-right:1.25rem}
+  .btns{flex-direction:column;align-items:stretch}
+  .btns .btn{text-align:center;padding-top:1rem;padding-bottom:1rem}
+  header .wrap{flex-wrap:wrap;row-gap:.25rem}
+  header nav:not(:has(.btn)){width:100%;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  header nav:not(:has(.btn)) a{margin:0 1.4rem 0 0;display:inline-block;padding:.55rem 0}
+  .hero{padding-top:2rem;padding-bottom:3rem}
+  .hero h1{font-size:clamp(2.1rem,9.5vw,3.2rem)}
+  .hero .lead,.hero p.lead{font-size:1.1rem}
+  section h2{font-size:clamp(1.7rem,7vw,2.3rem)}
+  .path{max-width:22rem;margin:0 auto}
+  .path .small{font-size:18px}
+  .path .big{font-size:26px}
+  .offers li,.offer{padding-top:1.25rem}
+  .offer{padding:1.5rem}
+  footer .wrap{flex-direction:column;gap:.5rem}
+  footer a{margin:0 1.4rem 0 0;display:inline-block;padding:.6rem 0}
+  .mcta{display:block;position:fixed;z-index:20;left:1rem;right:1rem;bottom:calc(env(safe-area-inset-bottom,0px) + .75rem);text-align:center;padding:1rem;border-radius:.6rem;font-weight:700;text-decoration:none;background:var(--accent,var(--coral));color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.25);transition:opacity .2s}
+  .mcta.hide{opacity:0;pointer-events:none}
+}
+@media(max-width:24rem){.hero h1{font-size:2rem}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="IO Coaching, Startseite"><span class="mark" aria-hidden="true"><i></i><b></b></span>Coaching</a>
+    <nav aria-label="Hauptnavigation">
+      <a href="#angebot">Angebot</a>
+      <a href="#systemisch">Systemisch</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#honorar">Honorar</a>
+      <a href="#ueber-mich">Über mich</a>
+      <a href="#faq">Fragen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Klarheit für den nächsten Schritt.</h1>
+        <p class="lead">Systemisches Einzelcoaching für Menschen, die sich beruflich oder persönlich neu ausrichten wollen. Du bringst die Fragen mit, gemeinsam entwickeln wir deine Antworten.</p>
+        <div class="btns">
+          <a class="btn primary" href="#kontakt">Kostenloses Erstgespräch buchen</a>
+          <a class="btn ghost" href="#angebot">Angebot ansehen</a>
+        </div>
+      </div>
+      <svg class="path" viewBox="0 0 440 400" role="img" aria-label="Ein Weg führt vom Punkt „Jetzt“ über die Stationen „Klarheit“ und „Plan“ zum Ring „Ziel“">
+        <g class="road">
+          <path d="M80 326 L80 310 C 80 210 190 260 200 190 C 210 120 250 110 292 96 L309 90" fill="none" stroke="#D3E6E6" stroke-width="30" stroke-linecap="butt"/>
+          <path class="flow" d="M80 326 L80 310 C 80 210 190 260 200 190 C 210 120 250 110 292 96 L309 90" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="4 12" stroke-linecap="round"/>
+          <path class="cover" d="M80 326 L80 310 C 80 210 190 260 200 190 C 210 120 250 110 292 96 L309 90" pathLength="1" fill="none"/>
+        </g>
+        <rect class="i-mark" x="60" y="290" width="22" height="102" rx="11" fill="#12262B"/>
+        <g class="o-mark">
+          <circle cx="347" cy="88" r="40" fill="none" stroke="#1F6F78" stroke-width="22"/>
+          <circle cx="347" cy="88" r="12" fill="#E9B949"/>
+        </g>
+        <g class="st1">
+          <circle cx="153" cy="233" r="9" fill="#fff" stroke="#1F6F78" stroke-width="5"/>
+          <text class="small" x="168" y="262">Klarheit</text>
+        </g>
+        <g class="st2">
+          <circle cx="200" cy="190" r="9" fill="#fff" stroke="#1F6F78" stroke-width="5"/>
+          <text class="small" x="182" y="176" text-anchor="end">Plan</text>
+        </g>
+        <g transform="translate(91.0 266.5)"><g class="pop1">
+            <circle r="16" fill="#E9B949" stroke="#fff" stroke-width="3"/>
+            <text y="7.5" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-weight="800" font-size="22" fill="#12262B">?</text>
+          </g></g>
+        <g transform="translate(184.6 219.0)"><g class="pop2">
+            <circle r="16" fill="#E9B949" stroke="#fff" stroke-width="3"/>
+            <circle cx="0" cy="-3.2" r="8.2" fill="#FFF6D6" stroke="#12262B" stroke-width="2.2"/>
+            <path d="M-3.2 -1.5 L-1.6 -5.5 L0 -2 L1.6 -5.5 L3.2 -1.5" fill="none" stroke="#12262B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M-3.6 5.2 H3.6" stroke="#12262B" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M-2.4 9.2 H2.4" stroke="#12262B" stroke-width="2.2" stroke-linecap="round"/>
+          </g></g>
+        <g transform="translate(241.8 116.5)"><g class="pop3">
+            <circle r="16" fill="#E9B949" stroke="#fff" stroke-width="3"/>
+            <text y="7.5" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-weight="800" font-size="22" fill="#12262B">!</text>
+          </g></g>
+        <g class="lab">
+          <text class="big" x="96" y="358">Jetzt</text>
+          <text class="big" x="347" y="176" text-anchor="middle">Ziel</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <section id="angebot">
+    <div class="wrap">
+      <h2>Wobei ich dich begleite</h2>
+      <ul class="offers">
+        <li>
+          <h3>Berufliche Neuorientierung</h3>
+          <p>Du merkst, dass deine berufliche Situation nicht mehr zu dir passt, und weißt noch nicht, wohin es gehen soll? Wir klären deine Stärken, Werte und Optionen und planen konkrete Schritte.</p>
+        </li>
+        <li>
+          <h3>Entscheidungen treffen</h3>
+          <p>Umzug, Berufswechsel, Selbstständigkeit: Wir ordnen deine Gedanken und Argumente, damit du eine Entscheidung triffst, hinter der du stehst.</p>
+        </li>
+        <li>
+          <h3>Persönliche Entwicklung</h3>
+          <p>Selbstvertrauen stärken, Grenzen setzen, Druck verringern: Wir arbeiten an dem, was dich im Alltag ausbremst.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="systemisch">
+    <div class="wrap">
+      <h2>Was bedeutet systemisch?</h2>
+      <p style="margin-bottom:1rem">Der systemische Ansatz geht davon aus, dass sich ein Mensch nicht losgelöst von seinem Umfeld verstehen lässt. Beruf, Familie, Team, Beziehungen und die eigenen Erwartungen bilden zusammen ein System, dessen Teile sich gegenseitig beeinflussen. Ein Verhalten oder ein Problem erscheint deshalb oft in einem anderen Licht, wenn man es im Zusammenhang betrachtet.</p>
+      <p style="margin-bottom:2.5rem">Systemisches Coaching nutzt diese Sichtweise für deine Entwicklung. Wir klären, in welchem Umfeld dein Anliegen entsteht, welche Muster und Wechselwirkungen eine Rolle spielen und wo du selbst Einfluss nehmen kannst. Der Ansatz stammt aus der Systemtheorie und der Familientherapie und wird heute in Beratung, Coaching und Organisationsentwicklung eingesetzt.</p>
+      <ul class="offers">
+        <li>
+          <h3>Du bist der Experte</h3>
+          <p>Du kennst dein Leben und deine Situation besser als jeder andere. Ich begleite den Prozess und stelle Fragen, bringe aber keine fertigen Lösungen mit. Die Entscheidungen triffst du.</p>
+        </li>
+        <li>
+          <h3>Den Zusammenhang sehen</h3>
+          <p>Wir betrachten dein Anliegen im Kontext von Beruf, Beziehungen und Werten. So erkennst du, welche Faktoren dich beeinflussen und an welcher Stelle eine Veränderung am meisten bewirkt.</p>
+        </li>
+        <li>
+          <h3>Lösungen statt Ursachen</h3>
+          <p>Wir suchen nicht nach Schuld oder dem einen Grund, sondern fragen, wie deine Zukunft aussehen soll und was dich dorthin bringt. Auch das, was bereits gut funktioniert, wird zur Ressource.</p>
+        </li>
+        <li>
+          <h3>Perspektivwechsel</h3>
+          <p>Mit gezielten Fragen, Skalierungen und dem Umdeuten von Situationen (Reframing) betrachten wir dein Thema aus neuen Blickwinkeln. So werden Handlungsmöglichkeiten sichtbar, die vorher nicht erkennbar waren.</p>
+        </li>
+        <li>
+          <h3>Eine klare Haltung</h3>
+          <p>Meine Arbeit beruht auf Wertschätzung, Neugier und Neutralität. Ich bewerte nicht, was du tust, sondern unterstütze dich dabei, deinen eigenen Weg zu finden. Was du mir anvertraust, bleibt vertraulich.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ablauf">
+    <div class="wrap">
+      <h2>So läuft das Coaching ab</h2>
+      <ol class="steps">
+        <li>
+          <h3>Erstgespräch</h3>
+          <p>20 Minuten, kostenlos und unverbindlich. Du schilderst dein Anliegen, wir lernen uns kennen und klären, ob wir zusammenpassen. Danach erhältst du ein schriftliches Angebot.</p>
+        </li>
+        <li>
+          <h3>Ziel klären</h3>
+          <p>In der ersten Sitzung halten wir fest, wo du stehst und was sich ändern soll. Daraus entsteht ein klares Ziel, an dem wir uns orientieren.</p>
+        </li>
+        <li>
+          <h3>Coaching-Sitzungen</h3>
+          <p>Wir arbeiten in regelmäßigen Terminen an deinem Thema, online oder vor Ort. Du bestimmst das Tempo und sagst, wenn etwas nicht passt.</p>
+        </li>
+        <li>
+          <h3>Umsetzung und Abschluss</h3>
+          <p>Du gehst mit einem Plan und kleinen, machbaren Schritten in den Alltag. Am Ende schauen wir gemeinsam, was erreicht ist und wie es weitergeht.</p>
+        </li>
+      </ol>
+      <p class="step-note">Coaching ersetzt keine Psychotherapie und keine ärztliche Behandlung.</p>
+    </div>
+  </section>
+
+  <section id="honorar">
+    <div class="wrap">
+      <h2>Honorar und Rahmen</h2>
+      <ul class="offers">
+        <li>
+          <h3>Erstgespräch</h3>
+          <p>20 Minuten, kostenlos und unverbindlich, online oder telefonisch.</p>
+        </li>
+        <li>
+          <h3>Angebot</h3>
+          <p>Nach dem Erstgespräch erhältst du ein schriftliches Angebot.</p>
+        </li>
+        <li>
+          <h3>Coaching-Sitzung</h3>
+          <p>Der Preis wird vorab mit dir vereinbart. Abgerechnet wird in 60-Minuten-Einheiten.</p>
+        </li>
+        <li>
+          <h3>Ort und Sprache</h3>
+          <p>Online per Video, telefonisch oder persönlich in Berlin/Brandenburg. Gibt es vor Ort keinen geeigneten Raum, kann ich einen Raum anmieten. Die zusätzlichen Kosten richten sich nach deinen Wünschen an den Raum. Bitte melde den Bedarf bei der Terminvereinbarung mit an. Ich arbeite auf Deutsch und Türkisch.</p>
+        </li>
+        <li>
+          <h3>Absagen</h3>
+          <p>Du kannst einen Termin bis 24 Stunden vorher kostenfrei absagen oder verschieben.</p>
+        </li>
+        <li>
+          <h3>Bezahlung</h3>
+          <p>Nach jeder Sitzung bekommst du eine Rechnung und zahlst per Überweisung innerhalb von 14 Tagen.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="stimmen">
+    <div class="wrap">
+      <h2>Stimmen aus dem Coaching</h2>
+      <div class="rev-grid">
+        <figure class="rev">
+          <blockquote><p><mark class="ph">[Hier die Stimme einfügen, zwei bis vier Sätze.]</mark></p></blockquote>
+          <figcaption>
+            <span class="ini" aria-hidden="true">AB</span>
+            <span><span class="who">A. B.</span><span class="ctx"><mark class="ph">[Thema des Coachings, z. B. Neuorientierung]</mark></span></span>
+          </figcaption>
+        </figure>
+        <figure class="rev">
+          <blockquote><p><mark class="ph">[Hier die Stimme einfügen, zwei bis vier Sätze.]</mark></p></blockquote>
+          <figcaption>
+            <span class="ini" aria-hidden="true">AB</span>
+            <span><span class="who">A. B.</span><span class="ctx"><mark class="ph">[Thema des Coachings, z. B. Neuorientierung]</mark></span></span>
+          </figcaption>
+        </figure>
+        <figure class="rev">
+          <blockquote><p><mark class="ph">[Hier die Stimme einfügen, zwei bis vier Sätze.]</mark></p></blockquote>
+          <figcaption>
+            <span class="ini" aria-hidden="true">AB</span>
+            <span><span class="who">A. B.</span><span class="ctx"><mark class="ph">[Thema des Coachings, z. B. Neuorientierung]</mark></span></span>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="rev-note">Die Stimmen werden mit Einwilligung der Personen und in abgekürzter Form veröffentlicht.</p>
+    </div>
+  </section>
+
+  <section id="ueber-mich">
+    <div class="wrap about">
+      <img class="portrait" src="ismail-oezcamur.jpg" width="800" height="1000" alt="Porträt von Ismail Özcamur, Coach in Berlin/Brandenburg" loading="lazy">
+      <div>
+        <h2>Über mich</h2>
+        <p>Ich bin Ismail Özcamur, Coach in Berlin/Brandenburg, und arbeite systemisch. <mark class="ph">[Hier in ein bis zwei Sätzen erklären, warum du coachst.]</mark></p>
+        <p style="margin-top:1rem">Ich bringe langjährige Erfahrung aus der Eingliederungshilfe, der Personalführung, dem Qualitätsmanagement, der Dozententätigkeit und der Projektleitung bei der Einführung von Software mit. Diese Praxis hilft mir, berufliche Veränderungen und Entscheidungen realistisch einzuordnen.</p>
+        <p style="margin-top:1rem"><strong>Abschlüsse</strong></p>
+        <ul class="qual">
+          <li>Systemischer Master Business Coach (seit April 2023), INA CCW Internationale Akademie – Coaching Campus World</li>
+          <li>Master of Science (M.Sc.) Pflegemanagement/Pflegewissenschaften</li>
+        </ul>
+        <p style="margin-top:1rem">Mir ist wichtig, dass du dich verstanden fühlst und konkrete Ergebnisse mitnimmst. Dafür arbeite ich ehrlich, wertschätzend und lösungsorientiert.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        <details><summary>Was passiert im Erstgespräch?</summary><p>Du erzählst mir, worum es geht und was du dir vom Coaching wünschst. Ich erkläre dir, wie ich arbeite. Danach entscheiden wir beide in Ruhe, ob wir zusammenarbeiten. Du gehst keine Verpflichtung ein.</p></details>
+        <details><summary>Wie viele Sitzungen brauche ich?</summary><p>Das hängt von deinem Anliegen ab. Viele Themen bearbeiten wir in 5 bis 7 Sitzungen. Nach jeder Sitzung besprechen wir, wie wir weitermachen.</p></details>
+        <details><summary>Ist alles vertraulich?</summary><p>Ja. Ich verpflichte mich zur Verschwiegenheit und gebe nichts an Dritte weiter, auch nicht an Arbeitgeber oder Familie, es sei denn, du entbindest mich ausdrücklich oder das Gesetz verlangt es. Wie ich mit deinen Daten umgehe, steht in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p></details>
+        <details><summary>Ist Coaching eine Therapie?</summary><p>Nein. Coaching richtet sich an Menschen, die handlungsfähig sind und etwas verändern möchten. Es ersetzt keine Psychotherapie und keine ärztliche Behandlung. Wenn ich merke, dass eine Therapie für dich besser wäre, sage ich dir das offen.</p></details>
+        <details><summary>Online oder vor Ort?</summary><p>Beides ist möglich. Online arbeiten wir per Video, auf Wunsch auch telefonisch. Vor Ort treffen wir uns in Berlin/Brandenburg. Gibt es dafür keinen geeigneten Raum, kann ich einen Raum anmieten. Das verursacht zusätzliche Kosten, die sich nach deinen Wünschen an den Raum richten. Bitte melde den Bedarf bei der Terminvereinbarung mit an. Für die meisten Themen funktioniert online genauso gut.</p></details>
+        <details><summary>Übernimmt die Krankenkasse oder mein Arbeitgeber die Kosten?</summary><p>Coaching ist keine Kassenleistung. Wenn dein Thema beruflich ist, übernimmt manchmal der Arbeitgeber die Kosten, frag dort am besten nach. Rechnungen stelle ich auf Wunsch auf dich oder deinen Arbeitgeber aus.</p></details>
+        </div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="contact">
+    <div class="wrap">
+      <h2>Lass uns sprechen</h2>
+      <p>Schreib mir kurz, worum es geht. Ich melde mich innerhalb von zwei Werktagen und schlage dir einen Termin für das Erstgespräch vor.</p>
+      <div class="btns">
+        <a class="btn primary" href="mailto:info@io-coaching.io?subject=Anfrage%20Erstgespr%C3%A4ch">E-Mail schreiben</a>
+      </div>
+      <a class="mail" href="mailto:info@io-coaching.io">info@io-coaching.io</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 IO Coaching</span>
+    <span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+
+<a class="mcta" href="#kontakt">Kostenloses Erstgespräch</a>
+<script>
+(function(){var b=document.querySelector('.mcta'),k=document.getElementById('kontakt');
+if(b&&k&&'IntersectionObserver' in window){new IntersectionObserver(function(e){b.classList.toggle('hide',e[0].isIntersecting)},{threshold:.2}).observe(k)}})();
+</script>
+</body>
+</html>
